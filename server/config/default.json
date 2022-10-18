@@ -1,0 +1,4 @@
+{
+    "serverPort" : 5000,
+    "dbUrl" : "mongodb://root:shurik37@185.104.115.124:27017/otsostorage?authMechanism=DEFAULT&authSource=admin"
+}
