@@ -5,7 +5,7 @@ import config from "config";
 //routers
 import authRouter from "./routers/auth.router.js"  
 
-const PORT = config.get('serverPort')
+const PORT = config.get('serverPort');
 
 const app = express();
 

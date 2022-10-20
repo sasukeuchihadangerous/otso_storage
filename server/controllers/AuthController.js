@@ -15,6 +15,15 @@ class AuthController {
             res.status(500).json({error: e.message});
         }
     }
+    async login(req, res) {
+        try {
+            const {email, password} = req.body;
+            const user = await AuthService.login({email, password});
+            res.json(user);
+        } catch (e) {
+            res.status(500).json({error: e.message});
+        }
+    }
 }
 
 export default new AuthController();
