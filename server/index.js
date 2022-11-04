@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import config from "config";
+import cors from "cors";
 
 //routers
 import authRouter from "./routers/auth.router.js"  
@@ -9,6 +10,7 @@ const PORT = config.get('serverPort');
 
 const app = express();
 
+app.use(cors({origin:['http://www.localhost:3000', 'http://localhost:3000'],credentials: true}));
 app.use(express.json());
 app.use('/api/auth', authRouter);
 
