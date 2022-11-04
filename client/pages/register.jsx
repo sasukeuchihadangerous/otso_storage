@@ -3,27 +3,37 @@ import { useForm } from 'react-hook-form';
 import Logo from '../assets/logo.svg';
 import styles from '../styles/register.module.scss';
 import Image from 'next/image';
+import { useRouter } from 'next/router'
 import Input from '../components/UI/Input/Input';
 import Button from '../components/UI/Button/Button';
 import Link from 'next/link'
 import { IoReturnDownBackOutline } from "react-icons/io5";
+import { BiErrorCircle, BiCheckCircle } from "react-icons/bi";
+
 import { motion } from "framer-motion";
 import AuthService from '../API/AuthService';
+import Modal from '../components/UI/Modal/Modal';
 
 const Register = () => {
 
     const { register, watch, handleSubmit, formState: { errors } } = useForm();
-    const [btnLock, setBtnLock] = useState(false)
+    const [btnLock, setBtnLock] = useState(false);
+    const [modal, setModal] = useState(false);
+    const [regError, setRegError] = useState('');
+    const router = useRouter();
 
     const submitForm = async (data) => {
         setBtnLock(true);
         const response = await AuthService.registration(data);
         if(response.data?.error) {
-            console.log(response.data.error);
+            setRegError(response.data.error);
+            setBtnLock(false);
         } else {
-            console.log(response.data);
+            setRegError('');
         }
+        setModal(true);
     } 
+
 
     return (
         <div className={styles.register}>
@@ -88,6 +98,20 @@ const Register = () => {
                 <p className={styles.txt}>Уже есть аккаунт в Otso Storage? <Link href="/"><a className={styles.link}>Войти</a></Link></p>
                 <p className={styles.back}><IoReturnDownBackOutline size='20px' className={styles.back_ico} color='#333F51'/> Вернутся на <Link href="/"><a className={styles.link}>главную</a></Link></p>
             </form>
+            <Modal active={modal} className={styles.modal} setActive={setModal} closable={regError ? true : false}>
+                {regError
+                ?
+                    <BiErrorCircle size='110px' color='#EF5944'></BiErrorCircle>
+                :
+                    <BiCheckCircle size='110px' color='#22C55E'></BiCheckCircle>
+                }
+                <h2 className={styles.m_title}>{regError ? 'Во время регистрации произошла ошибка!' : 'Успешная регистрация'}</h2>
+                <p className={styles.m_description}>{regError ? regError : 'На вашу почту отправленна ссылка для подтверждения регистрации'}</p>
+                
+                {!regError &&
+                    <Button className={styles.m_button} onClick={() => router.push('/login')}>Перейти к форме авторизации</Button>
+                }
+            </Modal>
         </div>
     );
 };

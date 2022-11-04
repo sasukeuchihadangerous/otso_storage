@@ -42,8 +42,26 @@
         color: #3575DD;
     }
 }
-
 .back_ico {
     vertical-align: middle;
     margin-right: 10px;
+}
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.m_title {
+    margin: 10px 0 20px 0;
+    font-size: 26px;
+    line-height: 30px;
+    text-align: center;
+}
+.m_description {
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+}
+.m_button {
+    margin-top: 25px;
 }
