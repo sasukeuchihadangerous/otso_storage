@@ -15,3 +15,17 @@
     border-radius: 20px;
     padding: 30px 40px;
 }
+
+@media (min-width: 381px) and (max-width: 768px) {
+    .modal {
+        padding: 20px 25px;
+        max-width: 400px;
+    }
+}
+
+@media (min-width: 0) and (max-width: 380px) {
+    .modal {
+        padding: 20px 25px;
+        max-width: 340px;
+    }
+}

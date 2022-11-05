@@ -1,6 +1,6 @@
 .register {
     background: #F3F3F3;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,4 +64,31 @@
 }
 .m_button {
     margin-top: 25px;
+}
+
+@media (min-width: 0) and (max-width: 768px) {
+    .register_form {
+        padding: 20px 20px;
+    }
+    .logo {
+        margin-bottom: 15px;
+    }
+    .title {
+        font-size: 28px;
+        line-height: 32px;
+        margin-bottom: 20px;
+    }
+
+    .m_title {
+        font-size: 22px;
+        line-height: 26px;
+    }
+    .m_description {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .t_ico {
+        height: 90px;
+        width: 90px;
+    }
 }

@@ -19,10 +19,6 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
 a,p,h1,h2,h3,h4,h5,h6,span,input,li,ul,button,label{font-family: 'Open Sans', sans-serif;font-weight: normal;font-size: 16px; color: #2A3342;}
 /*--------------------*/
 
-#__next {
-	height: inherit;
-}
-
 @media (prefers-color-scheme: dark) {
 	html {
 		color-scheme: dark;

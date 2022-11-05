@@ -101,9 +101,9 @@ const Register = () => {
             <Modal active={modal} className={styles.modal} setActive={setModal} closable={regError ? true : false}>
                 {regError
                 ?
-                    <BiErrorCircle size='110px' color='#EF5944'></BiErrorCircle>
+                    <BiErrorCircle className={styles.t_ico} size='110px' color='#EF5944'></BiErrorCircle>
                 :
-                    <BiCheckCircle size='110px' color='#22C55E'></BiCheckCircle>
+                    <BiCheckCircle className={styles.t_ico} size='110px' color='#22C55E'></BiCheckCircle>
                 }
                 <h2 className={styles.m_title}>{regError ? 'Во время регистрации произошла ошибка!' : 'Успешная регистрация'}</h2>
                 <p className={styles.m_description}>{regError ? regError : 'На вашу почту отправленна ссылка для подтверждения регистрации'}</p>
