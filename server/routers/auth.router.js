@@ -13,5 +13,6 @@ router.post('/registration',
     AuthController.register
 );
 router.post('/login', AuthController.login);
+router.post('/confirm', AuthController.confirm);
 
 export default router;

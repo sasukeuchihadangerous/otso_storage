@@ -24,6 +24,15 @@ class AuthController {
             res.status(500).json({error: e.message});
         }
     }
+    async confirm(req, res) {
+        try {
+            const { id } = req.body;
+            const confirmation = await AuthService.confirm({ id });
+            res.json(confirmation);
+        } catch (e) {
+            res.status(500).json({error: e.message});
+        }
+    }
 }
 
 export default new AuthController();

@@ -2,7 +2,7 @@ import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from "config";
-
+import sendConfirm from '../messages/confirmEmail.js';
 class AuthService {
     async register(user) {
         const candidate = await User.findOne({email: user.email});
@@ -17,6 +17,8 @@ class AuthService {
         const hashPassword = await bcrypt.hash(user.password, 5);
         const createdUser = await User.create({...user, password: hashPassword});
         await createdUser.save();
+        await sendConfirm(createdUser.id, createdUser.email);
+
         return createdUser;
     }
 
@@ -50,6 +52,23 @@ class AuthService {
                 usedSpace: getUser.usedSpace
             }
         }
+    }
+
+    async confirm( { id } ) {
+        const candidate = await User.findById(id);
+
+        if(!candidate) {
+            throw new Error('При подтверждении аккаунта произошла ошибка, попробуйте позже');
+        }
+
+        if(candidate.verify) {
+            throw new Error('Этот аккаунт уже подтвержден');
+        }
+
+        candidate.verify = 1;
+        await candidate.save();
+
+        return {message: "Аккаунт успешно подтвержден, вы можете перейти к форме авторизации"};
     }
 }
 
