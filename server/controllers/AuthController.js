@@ -2,7 +2,7 @@ import AuthService from '../services/AuthService.js';
 import {validationResult} from 'express-validator';
 
 class AuthController {
-    async register(req, res) {
+    async register(req, res, next) {
         try {
             const errors = validationResult(req);
             if(!errors.isEmpty()) {
@@ -12,25 +12,25 @@ class AuthController {
             const user = await AuthService.register({email, login, name, sname, password});
             res.json(user);
         } catch (e) {
-            res.status(500).json({error: e.message});
+            next(e);
         }
     }
-    async login(req, res) {
+    async login(req, res, next) {
         try {
             const {email, password} = req.body;
             const user = await AuthService.login({email, password});
             res.json(user);
         } catch (e) {
-            res.status(500).json({error: e.message});
+            next(e);
         }
     }
-    async confirm(req, res) {
+    async confirm(req, res, next) {
         try {
             const { id } = req.body;
             const confirmation = await AuthService.confirm({ id });
             res.json(confirmation);
         } catch (e) {
-            res.status(500).json({error: e.message});
+            next(e);
         }
     }
 }
