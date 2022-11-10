@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Logo from '../assets/logo.svg';
 import styles from '../styles/register.module.scss';
+import m_styles from '../styles/modal.module.scss';
 import Image from 'next/image';
 import { useRouter } from 'next/router'
 import Input from '../components/UI/Input/Input';
@@ -98,18 +99,18 @@ const Register = () => {
                 <p className={styles.txt}>Уже есть аккаунт в Otso Storage? <Link href="/"><a className={styles.link}>Войти</a></Link></p>
                 <p className={styles.back}><IoReturnDownBackOutline size='20px' className={styles.back_ico} color='#333F51'/> Вернутся на <Link href="/"><a className={styles.link}>главную</a></Link></p>
             </form>
-            <Modal active={modal} className={styles.modal} setActive={setModal} closable={regError ? true : false}>
+            <Modal active={modal} className={m_styles.modal} setActive={setModal} closable={regError ? true : false}>
                 {regError
                 ?
                     <BiErrorCircle className={styles.t_ico} size='110px' color='#EF5944'></BiErrorCircle>
                 :
                     <BiCheckCircle className={styles.t_ico} size='110px' color='#22C55E'></BiCheckCircle>
                 }
-                <h2 className={styles.m_title}>{regError ? 'Во время регистрации произошла ошибка!' : 'Успешная регистрация'}</h2>
-                <p className={styles.m_description}>{regError ? regError : 'На вашу почту отправленна ссылка для подтверждения регистрации'}</p>
+                <h2 className={m_styles.m_title}>{regError ? 'Во время регистрации произошла ошибка!' : 'Успешная регистрация'}</h2>
+                <p className={m_styles.m_description}>{regError ? regError : 'На вашу почту отправленна ссылка для подтверждения регистрации'}</p>
                 
                 {!regError &&
-                    <Button className={styles.m_button} onClick={() => router.push('/login')}>Перейти к форме авторизации</Button>
+                    <Button className={m_styles.m_button} onClick={() => router.push('/login')}>Перейти к форме авторизации</Button>
                 }
             </Modal>
         </div>

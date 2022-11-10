@@ -1,0 +1,34 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.m_title {
+    margin: 10px 0 20px 0;
+    font-size: 26px;
+    line-height: 30px;
+    text-align: center;
+}
+.m_description {
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+}
+.m_button {
+    margin-top: 25px;
+}
+
+@media (min-width: 0) and (max-width: 768px) {
+    .m_title {
+        font-size: 22px;
+        line-height: 26px;
+    }
+    .m_description {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .t_ico {
+        height: 90px;
+        width: 90px;
+    }
+}

@@ -17,4 +17,16 @@ export default class AuthService {
             return e.response;
         }
     }
+
+    static async confirm(id) {
+        try {
+            const response = await axios.post(API_URL + '/confirm', {
+                id: id,
+            }, 
+            { withCredentials: true })
+            return response; 
+        } catch (e) {
+            return e.response;
+        }
+    }
 }
