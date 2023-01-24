@@ -7,11 +7,17 @@ const userReducer = createSlice({
         isAuth: false
     },
     reducers: {
-        def: (state) => {
-            return state;
+        setUser: (state, action) => {
+            state.currentUser = action.payload;
+            state.isAuth = true;
+        },
+        logout: (state) => {
+            localStorage.removeItem('token');
+            state.currentUser = {};
+            state.isAuth = false;
         }
     }
 });
 
 export default userReducer.reducer;
-export const { def } = userReducer.actions;
+export const { setUser, logout } = userReducer.actions;

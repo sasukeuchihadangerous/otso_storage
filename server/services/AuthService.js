@@ -39,7 +39,7 @@ class AuthService {
             throw ApiError.BadRequest('Для входа, необходимо подтвердить почту');
         }
 
-        const token = jwt.sign({id: getUser.id}, config.get("secretKey"), {expiresIn: "1h"})
+        const token = jwt.sign({id: getUser.id, role: getUser.role}, config.get("secretKey"), {expiresIn: "1h"})
 
         return {
             token,
@@ -49,6 +49,7 @@ class AuthService {
                 login: getUser.login,
                 name: getUser.name,
                 sname: getUser.sname,
+                role: getUser.role,
                 diskSpace: getUser.diskSpace,
                 usedSpace: getUser.usedSpace
             }
@@ -70,6 +71,26 @@ class AuthService {
         await candidate.save();
 
         return {message: "Аккаунт успешно подтвержден, вы можете перейти к форме авторизации"};
+    }
+
+    async auth(id) {
+        const getUser = await User.findById(id);
+        
+        const token = jwt.sign({id: getUser.id, role: getUser.role}, config.get("secretKey"), {expiresIn: "1h"})
+
+        return {
+            token,
+            user: {
+                id: getUser.id,
+                email: getUser.email,
+                login: getUser.login,
+                name: getUser.name,
+                sname: getUser.sname,
+                role: getUser.role,
+                diskSpace: getUser.diskSpace,
+                usedSpace: getUser.usedSpace
+            }
+        }
     }
 }
 

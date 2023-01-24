@@ -33,6 +33,22 @@ class AuthController {
             next(e);
         }
     }
+    async auth(req, res, next) {
+        try {
+            const { id } = req.user;
+            const user = await AuthService.auth(id);
+            res.json(user);
+        } catch (e) {
+            next(e);
+        }
+    }
+    async test(req, res, next) {
+        try {
+            res.json('test');
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 export default new AuthController();
